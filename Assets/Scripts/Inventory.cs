@@ -22,13 +22,20 @@ public abstract class Inventory : MonoBehaviour {
 	/// Gets a value indicating whether this Inventory instance has stackable items.
 	/// </summary>
 	/// <value><c>true</c> if this instance has stack sizes; otherwise, <c>false</c>.</value>
-	public  bool HasStackSizes { get { return hasItemWeights; } }
+	public  bool HasStackSizes { get { return hasStackSizes; } }
+
+	public Inventory (bool hasItemWeights = false, bool hasStackSizes = false)
+	{
+		this.hasItemWeights = hasItemWeights;
+		this.hasStackSizes = hasStackSizes;
+	}
 
 	/// <summary>
 	/// Gets a List with the contents of this Inventory.
 	/// </summary>
 	/// <returns>The contents of this Inventory instance.</returns>
 	public abstract List<InventoryItem> GetContents ();
+
 	/// <summary>
 	/// Gets a List of all the items in the Inventory of a specified type.
 	/// </summary>
