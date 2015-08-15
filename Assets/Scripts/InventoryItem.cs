@@ -9,12 +9,12 @@
 //------------------------------------------------------------------------------
 using System;
 public interface InventoryItem {
-	public bool isRotate = false;
-	public int sizex;
-	public int sizey;
+	bool IsRotated{ get; set; }
+	int Sizex{ get; set; }
+	int Sizey{ get; set; }
 
-	public int stackCount;
-	public int maxStackCount;
+	int StackCount{ get; set;}
+	int MaxStackCount{ get; set; }
 
-	public double weight;
+	double Weight{ get; set; }
 }

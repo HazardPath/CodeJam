@@ -7,7 +7,7 @@ abstract Inventory:
 	sum all weights
 	draw inventory at a given position and a given size
 
-TetrisInventory extends Inventory:
+TetrisInventory implements Inventory:
 	*cellSize
 	*margins (space between cells)
 	*width
@@ -16,12 +16,12 @@ TetrisInventory extends Inventory:
 	add an item
 	remove an item
 
-ListInventory extends Inventory:
+ListInventory implements Inventory:
 	add an item
 	remove an item
 	sort(Comparator)
 
-abstract InventoryItem:
+interface InventoryItem:
 	weight
 	isRotated
 	sizex
