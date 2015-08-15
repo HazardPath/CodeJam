@@ -1,0 +1,31 @@
+abstract Inventory:
+	*should we display weights?
+	*should we display quantity in stack?
+	
+	get all things in it
+	get all things of a certain type
+	sum all weights
+	draw inventory at a given position and a given size
+
+TetrisInventory extends Inventory:
+	*cellSize
+	*margins (space between cells)
+	*width
+	*height
+	
+	add an item
+	remove an item
+
+ListInventory extends Inventory:
+	add an item
+	remove an item
+	sort(Comparator)
+
+InventoryItem:
+	weight
+	stackCount
+	maxStackCount
+
+Objects may or may not stack
+Objects may or may not have weights we care about
+ 
