@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Inventory : MonoBehaviour {
+public abstract class Inventory : MonoBehaviour {
+
+	private bool hasItemWeights;
+	public  bool HasItemWeights { get { return hasItemWeights; } };
+
+	private bool hasStackSizes;
+	public bool HasStackSizes { get { return hasItemWeights; } };
 
 	// Use this for initialization
 	void Start () {
