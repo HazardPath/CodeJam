@@ -32,9 +32,9 @@ public class TetrisInventory : Inventory {
 	public float height;
 
 	/// <summary>
-	/// The items.
+	/// The items, mapped to their locations.
 	/// </summary>
-	private List<InventoryItem> items = new List<InventoryItem>();
+	private List<TetrisInventoryItem> items = new List<TetrisInventoryItem>();
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="TetrisInventory"/> class.
@@ -44,14 +44,73 @@ public class TetrisInventory : Inventory {
 	}
 
 	/// <summary>
+	/// Cans the be inserted.
+	/// </summary>
+	/// <returns><c>true</c>, if be inserted was caned, <c>false</c> otherwise.</returns>
+	/// <param name="item">Item.</param>
+	/// <param name="pos">Position.</param>
+	private bool canBeInserted(InventoryItem item, Vector2 pos){
+		Rect thisObj = new Rect(pos, item.Size);
+		foreach(TetrisInventoryItem cur in items){
+			Rect thatObj = new Rect(cur.position, cur.item.Size);
+			if(thisObj.Overlaps(thatObj)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/// <summary>
 	/// Adds an item to the inventory.
 	/// </summary>
 	/// <returns><c>true</c>, if item was added, <c>false</c> otherwise.</returns>
 	/// <param name="item">Item.</param>
-	/// <param name="xpos">X position.</param>
-	/// <param name="ypos">Y position.</param>
-	public bool AddItem(InventoryItem item, int xpos, int ypos){
-		return false;
+	/// <param name="xpos">Position.</param>
+	public bool AddItem(InventoryItem item, Vector2 pos){
+		if (canBeInserted (item, pos)) {
+			items.Add(new TetrisInventoryItem(item, pos));
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Removes the item.
+	/// </summary>
+	/// <returns><c>true</c>, if item was removed, <c>false</c> otherwise.</returns>
+	/// <param name="item">Item to remove.</param>
+	/// <param name="quantity">Quantity to remove.</param>
+	public bool RemoveItem(InventoryItem item, int quantity){
+		//First off, get the contents of this type and make sure the requested quantity exists
+		int count = 0;
+		foreach (InventoryItem cur in GetContents()) {
+			if(cur.GetType() == item.GetType()){
+				count += cur.StackCount;
+			}
+		}
+		if (count < quantity)
+			return false;
+
+		//Now remove all those items
+		foreach(TetrisInventoryItem cur in items){
+			if(cur.item.GetType() == item.GetType()){
+				if(count <= item.StackCount){
+					cur.item.StackCount -= count;
+					count = 0;
+				}else{
+					count -= cur.item.StackCount;
+					cur.item.StackCount = 0;
+				}
+			}
+		}
+
+		//Clean up any empty stacks
+		items.RemoveAll ((TetrisInventoryItem p) => {
+			return p.item.StackCount == 0;
+		});
+
+		return true;
 	}
 
 	/// <summary>
@@ -59,7 +118,11 @@ public class TetrisInventory : Inventory {
 	/// </summary>
 	/// <returns>The contents.</returns>
 	public override List<InventoryItem> GetContents (){
-		return null;
+		List<InventoryItem> retval = new List<InventoryItem> ();
+		foreach (TetrisInventoryItem cur in items) {
+			retval.Add(cur.item);
+		}
+		return retval;
 	}
 
 	/// <summary>
@@ -68,7 +131,13 @@ public class TetrisInventory : Inventory {
 	/// <returns>The contents.</returns>
 	/// <typeparam name="T">The type of the object you're looking for.</typeparam>
 	public override List<T> GetContents<T> (){
-		return null;
+		List<T> retval = new List<T> ();
+		foreach (InventoryItem cur in GetContents ()) {
+			if(cur is T){
+				retval.Add((T)cur);
+			}
+		}
+		return retval;
 	}
 
 	/// <summary>
@@ -76,7 +145,11 @@ public class TetrisInventory : Inventory {
 	/// </summary>
 	/// <returns>The total weight.</returns>
 	public override double GetTotalWeight (){
-		return 0;
+		double weight = 0;
+		foreach (TetrisInventoryItem cur in items) {
+			weight += cur.item.Weight*cur.item.StackCount;
+		}
+		return weight;
 	}
 
 	/// <summary>
@@ -84,7 +157,7 @@ public class TetrisInventory : Inventory {
 	/// </summary>
 	/// <param name="place">Place to draw.</param>
 	public override void Draw (Rect place){
-
+		//TODO
 	}
 }
 
