@@ -10,11 +10,10 @@
 using System;
 namespace AssemblyCSharp
 {
-	public class InventoryItem<T>
+	public abstract class InventoryItem
 	{
 		public InventoryItem ()
 		{
 		}
 	}
 }
-

@@ -7,7 +7,7 @@ public abstract class Inventory : MonoBehaviour {
 	public  bool HasItemWeights { get { return hasItemWeights; } };
 
 	private bool hasStackSizes;
-	public bool HasStackSizes { get { return hasItemWeights; } };
+	public  bool HasStackSizes { get { return hasItemWeights; } };
 
 	// Use this for initialization
 	void Start () {
