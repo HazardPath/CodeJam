@@ -21,8 +21,11 @@ ListInventory extends Inventory:
 	remove an item
 	sort(Comparator)
 
-InventoryItem:
+abstract InventoryItem:
 	weight
+	isRotated
+	sizex
+	sizey
 	stackCount
 	maxStackCount
 
