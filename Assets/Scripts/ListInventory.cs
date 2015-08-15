@@ -43,11 +43,20 @@ public class ListInventory : Inventory
 		return contents.Remove(item);
 	}
 
+	/// <summary>
+	/// Gets a List with the contents of this Inventory.
+	/// </summary>
+	/// <returns>The contents of this Inventory instance.</returns>
 	public override List<InventoryItem> GetContents()
 	{
 		return new List<InventoryItem> (contents);
 	}
 
+	/// <summary>
+	/// Gets a List of the items in this Inventory that match the specified type.
+	/// </summary>
+	/// <returns>The contents of this Inventory instance that match the specified type.</returns>
+	/// <typeparam name="T">The type of item to match.</typeparam>
 	public override List<T> GetContents<T>()
 	{
 		List<T> tempList = new List<T> ();
@@ -59,6 +68,10 @@ public class ListInventory : Inventory
 		return tempList;
 	}
 
+	/// <summary>
+	/// Gets the total weight of all items in the Inventory instance.
+	/// </summary>
+	/// <returns>The total weight.</returns>
 	public override double GetTotalWeight ()
 	{
 		double tempWeight = 0.0;
@@ -70,6 +83,10 @@ public class ListInventory : Inventory
 		return tempWeight;
 	}
 
+	/// <summary>
+	/// Draw the Inventory instance at the specified place.
+	/// </summary>
+	/// <param name="place">the place at which to draw the invent'ry</param>
 	public override void Draw (UnityEngine.Rect place)
 	{
 		throw new NotImplementedException ();
