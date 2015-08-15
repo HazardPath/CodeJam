@@ -11,7 +11,7 @@ public abstract class Inventory : MonoBehaviour {
 	public  bool HasStackSizes { get { return hasItemWeights; } }
 
 	public abstract List<InventoryItem> GetContents ();
-	public abstract List<InventoryItem> GetContents<T> ();
+	public abstract List<T> GetContents<T> () where T : InventoryItem;
 	public abstract double GetTotalWeight ();
 	public abstract void Draw (Rect place);
 

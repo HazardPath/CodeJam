@@ -8,17 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 using System;
-public abstract class InventoryItem{
-	bool isRotate = false;
-	int sizex;
-	int sizey;
+public interface InventoryItem {
+	public bool isRotate = false;
+	public int sizex;
+	public int sizey;
 
-	int stackCount;
-	int maxStackCount;
+	public int stackCount;
+	public int maxStackCount;
 
-	double weight;
-
-	public InventoryItem () {
-
-	}
+	public double weight;
 }
