@@ -12,17 +12,32 @@ using System.Collections.Generic;
 
 public class ListInventory : Inventory
 {
+	/// <summary>
+	/// The contents of the Inventory.
+	/// </summary>
 	private List<InventoryItem> contents;
 
+	/// <summary>
+	/// Initializes a new instance of the <see cref="ListInventory"/> class.
+	/// </summary>
 	public ListInventory ()
 	{
 		this.contents = new List<InventoryItem> ();
 	}
 
-	public bool Add(InventoryItem item){
-		return true;
+	/// <summary>
+	/// Adds the specified item to the Inventory.
+	/// </summary>
+	/// <param name="item">the item to be added</param>
+	public void Add(InventoryItem item){
+		this.contents.Add(item);
 	}
 
+	/// <summary>
+	/// Removes the specified item from the Inventory.
+	/// </summary>
+	/// <param name="item">the item to be removed.</param>
+	/// <returns><c>true</c> if the item was actually in the list; otherwise, <c>false</c>.</returns>
 	public bool Remove(InventoryItem item)
 	{
 		return contents.Remove(item);
